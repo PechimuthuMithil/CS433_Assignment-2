@@ -20,7 +20,7 @@ Start Openv Switch
 ```shell
 sudo systemctl start openvswitch-switch.service
 ```
-Run Part1.py
+Run `Part1.py`
 ```shell
  sudo python3 Part1.py
 ```
@@ -37,7 +37,7 @@ and open `xterm rc` and run
 ```shell
 ip route change 10.0.0.0/24 via 10.102.3.10 dev rc-eth3
 ```
-Verify the path by running the following on xterm h1
+Verify the path by running the following on `xterm h1`
 ```shell
 traceroute 10.2.0.252
 ```
