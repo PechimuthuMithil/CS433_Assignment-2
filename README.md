@@ -28,7 +28,7 @@ In the mininet prompt type
 '''shell
 pingall
 ```
-to test the ping reachability
+to test the ping reachability 
 
 To change the routing path of routing from subnet A to subnet C through B, open `xterm ra` and run 
 ```shell
