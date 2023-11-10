@@ -25,7 +25,7 @@ Run Part1.py
  sudo python3 Part1.py
 ```
 In the mininet prompt type the following comand to to test the ping reachability 
-'''shell
+```shell
 pingall
 ```
 
