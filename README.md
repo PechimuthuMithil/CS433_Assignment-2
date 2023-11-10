@@ -30,7 +30,7 @@ pingall
 ```
 to test the ping reachability
 
-To change the routing path of routing from subnet A to subnet C through B, open `xterm ra` and run
+To change the routing path of routing from subnet A to subnet C through B, open `xterm ra` and run 
 ```shell
 ip route change 10.2.0.0/24 via 10.100.1.10 dev ra-eth2
 ```
