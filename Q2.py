@@ -25,23 +25,23 @@ def function4(net, iperf_port):
 
 def function1(net, server_ip, iperf_port, congestion_scheme):
     global client_command
-    client_command = f"iperf -c {server_ip} -p {iperf_port} -Z {congestion_scheme} " \
-                     f"> client_output1.txt 2>&1 & " \
-                     f"tcpdump -i any -w client1_capture.pcap &"
+    client_command = f"iperf -c {server_ip} -p {iperf_port} -Z {congestion_scheme} -l 4K -i 10 " \
+                     f"> client_output1.txt 2>&1 && " \
+                     f"tcpdump -i 20 -w client1_capture.pcap "
     makeTerm(node=net['h1'], cmd=client_command)
 
 def function2(net, server_ip, iperf_port, congestion_scheme):
     global client_command
     client_command = f"iperf -c {server_ip} -p {iperf_port} -Z {congestion_scheme} " \
-                     f"> client_output2.txt 2>&1 & " \
-                     f"tcpdump -i any -w client2_capture.pcap "
+                     f"> client_output2.txt 2>&1 " \
+                     f"tcpdump -i 20 -w client2_capture.pcap & "
     makeTerm(node=net['h2'], cmd=client_command)
 
 def function3(net, server_ip, iperf_port, congestion_scheme):
     global client_command
     client_command = f"iperf -c {server_ip} -p {iperf_port} -Z {congestion_scheme} " \
-                     f"> client_output3.txt 2>&1 & " \
-                     f"tcpdump -i any -w client3_capture.pcap "
+                     f"> client_output3.txt 2>&1  " \
+                     f"tcpdump -i 20 -w client3_capture.pcap & "
     makeTerm(node=net['h3'], cmd=client_command)
 
 def run(config, congestion_scheme):
@@ -54,6 +54,10 @@ def run(config, congestion_scheme):
         server_ip = h4.IP()
         iperf_port = 5001
         function4(net, iperf_port)
+        b=True
+        while not b:
+            if(b):
+                break
         function1(net, server_ip, iperf_port, congestion_scheme)
         
     elif config == 'c':
@@ -61,6 +65,10 @@ def run(config, congestion_scheme):
         server_ip = h4.IP()
         iperf_port = 5001
         function4(net, iperf_port)
+        b=True
+        while not b:
+            if(b):
+                break
         function1(net, server_ip, iperf_port, congestion_scheme)
         function2(net, server_ip, iperf_port, congestion_scheme)
         function3(net, server_ip, iperf_port, congestion_scheme)
