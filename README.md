@@ -24,11 +24,10 @@ Run Part1.py
 ```shell
  sudo python3 Part1.py
 ```
-In the mininet prompt type
+In the mininet prompt type the following comand to to test the ping reachability 
 '''shell
 pingall
 ```
-to test the ping reachability 
 
 To change the routing path of routing from subnet A to subnet C through B, open `xterm ra` and run 
 ```shell
