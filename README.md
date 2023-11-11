@@ -51,5 +51,7 @@ You can change the arguments for different resuls.
 ```shell
 sudo python3 Part2.py --congestion=reno --config=c --linkloss=2
 ```
+The program will generate .pcap files for all hosts and we can do throughput analysis with the help of Wireshark then.
+For analysis using graphs: Go to statistics -> TCP stream graphs -> Throughput. 
 
 
