@@ -45,3 +45,11 @@ One can also view the routing table of the routers by opening their respective x
 ```shell
 ip route
 ```
+### 3. Part 2 
+Run the program by executing the following command.
+You can change the arguments for different resuls.
+```shell
+sudo python3 Part2.py --congestion=reno --config=c --linkloss=2
+```
+
+
