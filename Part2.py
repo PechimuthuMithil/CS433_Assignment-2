@@ -24,31 +24,21 @@ def run(config, congestion_scheme,linkloss):
     net = Mininet(topo=topo, link=TCLink)
     net.start()
     if config == 'b':
-        h1 = net.get('h1')
-        h4 = net.get('h4')
-        server_ip = h4.IP()
-        iperf_port = 5001
-        net['h4'].cmd("iperf -s -p 5001,5002,5003 &")
-
-        net['h4'].cmd("timeout 15000 tcpdump -i h4-eth0 -w server_h4.pcap &")
+        net['h4'].cmd("iperf -s -p 5001 &")
+        net['h4'].cmd("timeout 10000 tcpdump -i h4-eth0 -w server_h4.pcap &")
         net['h1'].cmd("timeout 10000 tcpdump -i h1-eth0 -w c1ient_h1.pcap &") 
-
-        net['h1'].cmd("iperf -c 192.168.1.103 -p 5001 -t 5 -Z {} &".format(congestion_scheme))
+        net['h1'].cmd("iperf -c 192.168.1.103 -p 5001 -Z {congestion_scheme} -t 5 &")
         
     elif config == 'c':
-        h4 = net.get('h4')
-        server_ip = h4.IP()
-        iperf_port = 5001
-        net['h4'].cmd("iperf -s -p 5001,5002,5003 &")
 
-        net['h4'].cmd("timeout 10000 tcpdump -i h4-eth0 -w server_h4.pcap &")
-        net['h1'].cmd("timeout 7000 tcpdump -i h1-eth0 -w client_h1.pcap &") 
-        net['h2'].cmd("timeout 7000 tcpdump -i h2-eth0 -w client_h2.pcap &") 
-        net['h3'].cmd("timeout 7000 tcpdump -i h3-eth0 -w client_h3.pcap &") 
-
-        net['h1'].cmd("iperf -c 192.168.1.103 -p 5001 -t 5 -Z {} &".format(congestion_scheme))
-        net['h2'].cmd("iperf -c 192.168.1.103 -p 5002 -t 5 -Z {} &".format(congestion_scheme))
-        net['h3'].cmd("iperf -c 192.168.1.103 -p 5003 -t 5 -Z {} &".format(congestion_scheme))
+        net['h4'].cmd("iperf -s -p 5001 &")
+        net['h4'].cmd("timeout 15000 tcpdump -i h4-eth0 -w server_h4.pcap &")
+        net['h1'].cmd("timeout 15000 tcpdump -i h1-eth0 -w client_h1.pcap &") 
+        net['h2'].cmd("timeout 15000 tcpdump -i h2-eth0 -w client_h2.pcap &") 
+        net['h3'].cmd("timeout 15000 tcpdump -i h3-eth0 -w client_h3.pcap &")
+        net['h1'].cmd("iperf -c 192.168.1.103 -p 5001 -Z {congestion_scheme} -t 10 &")
+        net['h2'].cmd("iperf -c 192.168.1.103 -p 5001 -Z {congestion_scheme} -t 10 &")
+        net['h3'].cmd("iperf -c 192.168.1.103 -p 5001 -Z {congestion_scheme} -t 10 &")
     else:
         print("Invalid configuration specified!\nChoose from b or c\n")
     CLI(net)
